@@ -1,0 +1,29 @@
+job('Docker build and push') {
+  steps {
+    shell('sudo apt-get install docker.io -y')
+    shell('sudo chmod 777 /var/run/docker.sock')
+  }
+}
+
+job('DockerBuildandPublishDSL') {
+
+     scm {
+        git {
+        remote {
+                url('https://github.com/vaibhavkatoch1/Docker.git')
+                credentials('6f1d0d10-8925-4de0-87c2-254bb7226c0e')
+            }
+            wrappers {
+                preBuildCleanup()
+            } 
+            branch('main')
+        }
+    }
+
+    steps {
+        dockerBuildAndPublish {
+            repositoryName('vaibhavkatoch1/docker-image1')
+            registryCredentials('fc868187-b323-406d-8451-3a50c8d2538e')
+        }
+    }
+}
