@@ -1,0 +1,21 @@
+docker rm -f $(docker ps -a -q)
+echo "Running the container"
+sudo docker run -d -p80:80 registry.hub.docker.com/vaibhavkatoch1/docker-image1:newimage2
+echo "Checking it is build or not"
+if [ $? -ne 0 ]; then
+error "failed to start container"
+exit 1
+fi
+sleep 5
+result=$( curl http://172.31.27.224/wp-admin/setup-config.php )
+
+
+
+if [[ -n "$result" ]]; then
+  echo "test pass"
+else
+  echo "app error"
+fi
+
+
+docker rm -f $(docker ps -a -q)
