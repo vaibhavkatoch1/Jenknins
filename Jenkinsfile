@@ -54,5 +54,13 @@ pipeline {
             }
         }
 }
+        stage("Deploying the container in remote EC2"){
+            steps {
+                sh 'scp -o StrictHostKeyChecking=no -i /home/jenkins/.ssh/id_rsa deploy.sh ubuntu@18.224.21.182:~/.'
+                sh 'ssh -o StrictHostKeyChecking=no -i /home/jenkins/.ssh/id_rsa ubuntu@18.224.21.182 "chmod +x deploy.sh"'
+                sh 'ssh -o StrictHostKeyChecking=no -i /home/jenkins/.ssh/id_rsa ubuntu@18.224.21.182 "/bin/bash ~/deploy.sh"'
+            }
+        }
 }
 }
+
