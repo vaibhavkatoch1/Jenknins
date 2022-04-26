@@ -1,6 +1,11 @@
 pipeline {
     agent any 
     stages {
+        stage(Installing Docker) {
+        steps {
+               sh 'apt-get install docker.io'
+              }
+         }
         stage('Github') {
         steps {
             git branch: 'main',
