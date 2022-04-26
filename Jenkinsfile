@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     stages {
-        stage(Installing Docker) {
+        stage('Installing Docker') {
         steps {
                sh 'apt-get install docker.io'
               }
