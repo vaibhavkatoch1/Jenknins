@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Installing Docker') {
         steps {
-               sh 'apt-get install docker.io'
+               sh 'sudo apt-get install docker.io'
               }
          }
         stage('Github') {
